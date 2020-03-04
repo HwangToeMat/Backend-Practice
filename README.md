@@ -8,12 +8,12 @@ Receive the Wine quality data from DB, and show the average of data.
 ### * If you click "AverageData", you can get average of the "WineQuality_data".
 ![week4_2](./1.Spring/result_image/week4_2.png)
 ## 2. Django
-## 1. Make my website
+### 1. Make my website
 
 This site has implemented membership , login, and bulletin board functions.
 You can click this link to view the site. [Mywebsite](https://xoghsms.pythonanywhere.com)
 
-## 2. Second website(HTM_Mall)
+### 2. Second website(HTM_Mall)
 
 Htm_Mall is a site that embodies major functions of internet shopping malls.
 
