@@ -36,3 +36,4 @@ http://34.64.83.199:8000/product/create/
 [order list page]
 http://34.64.83.199:8000/order/
 
+![product](./product.png)
