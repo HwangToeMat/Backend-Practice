@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <style>
+      .chart div {
+        font: 20px sans-serif;
+        background-color: orange;
+        text-align: left;
+        padding: 3px;
+        margin: 1px;
+        color: steelblue;
+      }
+
+      .chart div:hover {
+        font: 25px sans-serif;
+        background-color: orangered;
+        text-align: left;
+        padding: 10x;
+        margin: 1px;
+        color: steelblue;
+      }
+    </style>
+    <title>RedWine Quality</title>
+  </head>
+  <body>
+    <h1>RedWine Quality(average)</h1>
+    <div class="chart"></div>
+    <script>
+      var temp = [];
+      var mean_list = [];
+      var keys = [];
+      d3.csv("winequality.csv", function(d) {
+        var keys = Object.keys(d);
+        temp.push(Object.values(d));
+        var dataset = Array.from(temp);
+        if (dataset.length == 1599) {
+          for (var i = 0; i < 12; i++) {
+            var k = 0;
+            var taeho = [];
+            for (var j = 0; j < dataset.length; j++) {
+              taeho.push(dataset[j][i]);
+            }
+            var mean = d3.mean(taeho);
+            mean_list.push(mean);
+          }
+          // console.log(keys);
+          // console.log(mean_list);
+          var div = d3
+            .select(".chart")
+            .selectAll("div")
+            .data(mean_list)
+            .enter()
+            .append("div")
+            //.style("width", "0px")
+            .transition()
+            .duration(2000)
+            .style("width", function(d) {
+              return d * 30 + "px";
+            })
+            .style("height", function(d) {
+              return 40 + "px";
+            })
+            .text(function(d, i) {
+              return keys[i] + ">>" + d.toFixed(3);
+            });
+        }
+      });
+    </script>
+  </body>
+</html>

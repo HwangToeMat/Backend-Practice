@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <style>
+        .chart div {
+        font: 20px sans-serif;
+        background-color: orange;
+        text-align: left;
+        padding: 3px;
+        margin: 1px;
+        color: steelblue;
+        }
+        .chart div:hover {
+        font: 25px sans-serif;
+        background-color: orangered;
+        text-align: left;
+        padding: 10x;
+        margin: 1px;
+        color: steelblue;
+        }
+        </style>
+    <title>RedWine Quality</title>
+</head>
+<body>
+    <h1>RedWine Quality(average)</h1>
+    <div class="chart"></div>
+    <script>
+        var temp = [];
+        var mean_list = [];
+        var keys = [];
+        d3.csv("winequality.csv", function(d) { //d3.csv를 사용해 winequality.csv를 json형태로 한 줄씩 읽음
+            var keys = Object.keys(d); //column의 label을 저장함
+            temp.push(Object.values(d));
+            var dataset = Array.from(temp); //dataset에 2차원배열 형태로 값을 저장함
+            if (dataset.length == 1599) { //마지막줄까지 다 읽으면 그래프를 그림
+                for (var i = 0; i < 12; i++) {
+                    var k = 0;
+                    var taeho = [];
+                for (var j = 0; j < dataset.length; j++) {
+                    taeho.push(dataset[j][i]); //taeho에 데이터를 column별로 넣음
+                }
+                var mean = d3.mean(taeho); //각 column의 평균값을 구함
+                mean_list.push(mean); //mean_list에 각 column의 평균값을 저장함
+                }
+                // console.log(keys);
+                // console.log(mean_list);
+                var div = d3.select(".chart") //각 column의 평균값으로 막대그래프를 그림
+                            .selectAll("div")
+                            .data(mean_list)
+                            .enter()
+                            .append("div")
+                            .transition()
+                            .duration(2000)
+                            .style("width", function(d) { //막대의 크기를 정의
+                                return d * 30 + "px";
+                            }).style("height", function(d) {
+                                return 40 + "px";
+                            }).text(function(d,i) { //막대에 쓰일 text를 정의
+                                return keys[i] + ">>" + d.toFixed(3);
+                            });
+            }
+        });
+    </script>
+  </body>
+</html>

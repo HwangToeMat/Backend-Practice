@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% load humanize %} {% block header %}
+<script>
+  function product_detail(id) {
+    $.ajax({
+      url: "/api/product/" + id,
+      success: function(result) {
+        $("#product-" + id)
+          .popover({
+            html: true,
+            content: result.name + "<br/>" + result.price
+          })
+          .popover("show");
+      }
+    });
+  }
+
+  function product_leave(id) {
+    $("#product-" + id).popover("hide");
+  }
+  $(document).ready(function() {});
+</script>
+{% endblock %} {% block contents %}
+<div class="row mt-5">
+  <div class="col-12">
+    <table class="table table-light">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">상품명</th>
+          <th scope="col">가격</th>
+          <th scope="col">등록날짜</th>
+        </tr>
+      </thead>
+      <tbody class="text-dark">
+        {% for product in product_list %}
+        <tr>
+          <th scope="row">{{ product.id }}</th>
+          <th>
+            <a
+              id="product-{{ product.id }}"
+              onmouseenter="product_detail({{ product.id }});"
+              onmouseleave="product_leave({{ product.id }});"
+              href="/product/{{ product.id }}"
+              >{{ product.name }}</a
+            >
+          </th>
+          <th>{{ product.price|intcomma }} 원</th>
+          <th>{{ product.register_date|date:'Y-m-d H:i' }}</th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}
