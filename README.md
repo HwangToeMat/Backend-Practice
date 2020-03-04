@@ -2,7 +2,7 @@
 Practice Django, Spring, Spring Boot....
 ## 1. Spring
 ### main fuction of this web
-Receive the Wine quality data from DB, show the data in graph.
+Receive the Wine quality data from DB, and show the average of data.
 ### * If you click "TotalData", you can get all of the "WineQuality_data".
 ![week4_1](./1.Spring/result_image/week4_1.png)
 ### * If you click "AverageData", you can get average of the "WineQuality_data".
