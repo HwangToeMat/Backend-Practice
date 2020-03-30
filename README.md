@@ -1,4 +1,4 @@
-# Backend-Practice
+# Backend-Practice ![HitCount](http://hits.dwyl.com/HwangToeMat/Backend-Practice.svg)
 Practice Django, Spring, Spring Boot....
 ## 1. Spring
 ### main fuction of this web
