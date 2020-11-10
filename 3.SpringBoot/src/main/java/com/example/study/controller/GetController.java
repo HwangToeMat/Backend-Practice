@@ -1,5 +1,6 @@
 package com.example.study.controller;
 
+import com.example.study.model.SearchParam;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,10 @@ public class GetController {
         return id+password;
     }
 
-    public String getMultiParameter(@RequestParam)
+    @GetMapping("/getMultiParameter")
+    public SearchParam getMultiParameter(SearchParam searchParam){
+        return searchParam;
+    }
 
 
 }
